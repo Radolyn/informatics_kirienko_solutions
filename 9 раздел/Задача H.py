@@ -1,11 +1,11 @@
 # Выведите значение наименьшего из всех положительных элементов в списке.# Известно, что в списке есть хотя бы один положительный элемент, а значения# всех элементов списка по модулю не превосходят 1000.
 
-inputList = input().split()
-
-a = 1000
-
-for i in range(len(inputList)):
-    s = int(inputList[i])
-    if s < a and s > 0:
-        a = s
+inputList = input().split()
+
+a = 1000
+
+for i in range(len(inputList)):
+    s = int(inputList[i])
+    if s < a and s > 0:
+        a = s
 print(a)

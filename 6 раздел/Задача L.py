@@ -1,14 +1,14 @@
 # # Дано прямоугольное поле, каждая клетка которого покрашена в какой-то цвет. За один ход необходимо перекрасить все клетки одного цвета в другой цвет. Стоимость перекраски одной клетки зависит от номера хода и задается функцией: $F(i) = ((A \cdot F(i-1)+B) \bmod~C) + 1$, $F_1$ – известная стоимость первого хода.# 
 
-text = input()
-
-first = text.find('h')
-second = text.rfind('h')
-
-text = text.replace('h', 'H')
-
-text2 = list(text)
-
-text2[first] = text2[second] = 'h'
-
+text = input()
+
+first = text.find('h')
+second = text.rfind('h')
+
+text = text.replace('h', 'H')
+
+text2 = list(text)
+
+text2[first] = text2[second] = 'h'
+
 print("".join(text2))

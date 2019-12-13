@@ -1,8 +1,8 @@
 # Дана строка, в которой буква h встречается# как минимум два раза. Повторите последовательность символов,# заключенную между первым и последнием появлением буквы# h два раза, сами буквы h повторять не надо.
 
-text = input()
-
-text2 = text.find('h') + 1
-text3 = text.rfind('h')
-
-print(text[0:text2] + text[text2:text3] + text[text2:text3] + text[text3:len(text)])
+text = input()
+
+text2 = text.find('h') + 1
+text3 = text.rfind('h')
+
+print(text[0:text2] + text[text2:text3] + text[text2:text3] + text[text3:len(text)])

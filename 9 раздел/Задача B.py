@@ -1,8 +1,8 @@
 # Напишите функцию, вычисляющую длину отрезка по координатам его концов. С помощью этой функции напишите программу, вычисляющую периметр треугольника по координатам трех его вершин.
 
-inputList = list(map(int, input().split(" ")))
-
-for i in range(0, len(inputList)):
-    if inputList[i] % 2 == 0:
-        print(inputList[i], end=' ')
-
+inputList = list(map(int, input().split(" ")))
+
+for i in range(0, len(inputList)):
+    if inputList[i] % 2 == 0:
+        print(inputList[i], end=' ')
+

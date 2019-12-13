@@ -163,12 +163,14 @@ for i in range(start_id, end_id + 1, 1):
     if debug:
         print(desc)
 
-    f = open(folder + "\Задача %s.py" % letter, "w+", encoding='utf-8')
+    f = open(folder + "\Задача %s.py" % letter, "w+", encoding='utf-8', newline='')
 
     f.write('# ')
     f.write(desc.replace('\n', '# '))
     f.write('\n\n')
-    f.write(source)
+    f.write(source.replace('\r\n', '\n'))
+
+    f.close()
 
     print('Класс работает, ставлю ржомбу. (%s, %i)\n\n' % (letter, problem_id))
 
