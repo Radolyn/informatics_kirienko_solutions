@@ -1,19 +1,24 @@
+# coding=utf-8
 # Дева4ки балдеем
 
-import string
-import requests
-import json
-from operator import attrgetter
-from bs4 import BeautifulSoup
-import lxml
-import sys
-import os
+try:
+    import string
+    import requests
+    import json
+    from operator import attrgetter
+    from bs4 import BeautifulSoup
+    import lxml
+    import sys
+    import os
+except:
+    print('Запустите сначала deps.py - установите зависимости.')
+    exit(3)
 
 # Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением
-# API у них не задокументировано *(или я не нашёл), так что парсим 'грязно'
+# API у них не задокументировано *(я нашёл роуты, но не более: https://github.com/InformaticsMskRu/informatics-mccme-ru/blob/master/pynformatics/__init__.py), так что парсим 'грязно'
 
 if len(sys.argv) != 6:
-    print('Usage: parser.py startid endid userid folder modulesession')
+    print('Использование: parser.py startid endid userid folder modulesession\nДля получения modulesession запустите getKey.py')
     exit(2)
 
 start_id = int(sys.argv[1])
