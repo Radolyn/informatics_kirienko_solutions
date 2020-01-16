@@ -10,6 +10,8 @@ try:
     import lxml
     import sys
     import os
+    import pickle
+    from utils import parse_argv, usage, get_user_details, load_cookies
 except:
     print('Запустите сначала deps.py - установите зависимости.')
     exit(3)
@@ -17,32 +19,33 @@ except:
 # Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением
 # API у них не задокументировано *(я нашёл роуты, но не более: https://github.com/InformaticsMskRu/informatics-mccme-ru/blob/master/pynformatics/__init__.py), так что парсим 'грязно'
 
-if len(sys.argv) != 6:
-    print('Использование: parser.py startid endid userid folder modulesession\nДля получения modulesession запустите getKey.py')
-    exit(2)
+# Выводит всю отладочную информацию
 
-start_id = int(sys.argv[1])
-end_id = int(sys.argv[2])
-user_id = sys.argv[3]
-folder = sys.argv[4]
+debug = True
+
+# Парсим аргументы из ком. строки
+parsed = parse_argv(sys.argv[1:])
+
+if debug:
+    print(parsed)
+
+start_id = parsed['range'][0]
+end_id = parsed['range'][1]
+folder = parsed['folder']
 
 # Селектор
 
 desc_selector = '#content > table > tbody > tr:nth-child(2) > td:nth-child(2) > div > div > div:nth-child(11) > div.legend > p'
 
-# Нет бы сделать какой-нибудь API-key, мы лучше сделаем проверку авторизацию по кукам!
-
-cookies = {
-    'MoodleSession': sys.argv[5]
-}
-
 # Заголовки
 
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'}
-
-# Выводит все json ответы
-
-debug = False
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+    'DNT': '1',
+    'Upgrade-Insecure-Requests': '1',
+    'Origin': 'https://informatics.mccme.ru'
+}
 
 # Все букОвки от A до AZ (не бойтесь, я их сгенерировал за 3 строчки :D)
 
@@ -51,6 +54,11 @@ letters_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 # Сколько всего скачано
 
 passes = 0
+
+# Сессия для парсера
+
+session = requests.Session()
+
 
 
 print('''\
@@ -63,21 +71,44 @@ print('''\
                                                          
                                                          
                                                          ''')
+                                                         
 
+# Создаём папку
+if not os.path.exists(folder):
+    os.makedirs(folder)
 
+if not os.path.exists('session'):
+    print('Запустите сначала getKey.py - получите ключ.')
+    exit(420)
+
+# Загружаем куки
+session.cookies = load_cookies()
+
+# Проверка на валидность
+userdata = get_user_details(session)
+
+if userdata == None:
+    print('Токен истёк или невалиден. Получите новый с помощью getKey.py')
+    exit(4)
+
+print('Доброго времени суток, ' + userdata['name'])
+print('Произошла авторизация, идём к выкачке\n\n')
+
+user_id = userdata['id']
+
+# Главный кос... цикл
 for i in range(start_id, end_id + 1, 1):
 
+    # Для удобства номер задания обозначим как problem_id, а букву - letter
     problem_id = i
-    letter = letters_list[i - start_id]
+    letter = letters_list[i - start_id + letters_list.index(parsed['letter'])]
 
+    # Получаем всю информацию по заданию
     url = 'https://informatics.mccme.ru/py/problem/%s/filter-runs?problem_id=%s&from_timestamp=-1&to_timestamp=-1&group_id=0&user_id=%s&lang_id=-1&status_id=-1&statement_id=0&count=10&with_comment=&page=1' % (
         problem_id, problem_id, user_id)
 
-    response = requests.get(url, cookies=cookies)
+    response = session.get(url, cookies=load_cookies())
     data = json.loads(response.text)
-
-    if not os.path.exists(folder):
-        os.makedirs(folder)
 
     if debug:
         print(response.text)
@@ -91,6 +122,7 @@ for i in range(start_id, end_id + 1, 1):
 
     success_runs = list()
 
+    # За выполненное задание дают 100 баллов
     for item in data['data']:
         if item['ejudge_score'] == 100:
             success_runs.append(item)
@@ -110,14 +142,16 @@ for i in range(start_id, end_id + 1, 1):
 
     print('Получаем source код...')
 
+    # Парсим исходный код
     source_url = 'https://informatics.mccme.ru/py/problem/run/%i/source' % run['id']
 
-    response = requests.get(source_url, cookies=cookies)
+    response = session.get(source_url, cookies=load_cookies())
     data = json.loads(response.text)
 
-
+    # Если не смогли - идём к след. заданию
     if debug:
         print(response.text)
+
     if data['status_code'] != 200:
         print('Ставлю дизлайк и идём дальше\n\n')
         continue
@@ -129,21 +163,23 @@ for i in range(start_id, end_id + 1, 1):
     if debug:
         print(source)
 
+    # Парсим описание. На самом деле, это для поисковиков, чтобы лучше индексировали :)
     desc_url = 'https://informatics.mccme.ru/mod/statements/view3.php?id=%s' % problem_id
 
-    page = requests.get(desc_url)
+    page = session.get(desc_url)
 
     soup = BeautifulSoup(page.text, 'lxml')
     if debug:
         print(soup)
 
+    # Описание может быть просто в div'е legend, а может быть обёрнуто в параграф
     desc = soup.find('div', {'class': 'legend'})
 
     if desc == None:
         print('Ржомба не сработала, продолжаем флексить')
         desc_url = 'https://informatics.mccme.ru/mod/statements/view3.php?chapterid=%s' % problem_id
 
-        page = requests.get(desc_url)
+        page = session.get(desc_url)
 
         soup = BeautifulSoup(page.content, 'lxml')
         if debug:
@@ -168,10 +204,14 @@ for i in range(start_id, end_id + 1, 1):
     if debug:
         print(desc)
 
-    f = open(folder + "\Задача %s.py" % letter, "w+", encoding='utf-8', newline='')
+    # Сохраняем описание + исходный код
+    f = open(folder + "\Задача %s.py" % letter, "w+", encoding='utf-8', newline='\n')
 
+    #
     f.write('# ')
+    # У описания новые строки заменяем на '# ', чтобы было однородней
     f.write(desc.replace('\n', '# '))
+    # Костыль.нет
     f.write('\n\n')
     f.write(source.replace('\r\n', '\n'))
 
