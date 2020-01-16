@@ -1,17 +1,15 @@
 # Informatics ответы
-Решения задач авторского курса Д. П. Кириенко. с informatics.mccme.ru
+Решения задач авторского курса Д. П. Кириенко с informatics.mccme.ru
 
 ## Парсер
 Чтобы не копировать код и описание с сайта, был сделан парсер.
 
 Для его работы необходимо установить зависимости:
 ```sh
-pip install bs4
-pip install requests
-pip install lxml
+python deps.py
 ```
 
-Использование: ```python parser.py startid endid userid folder modulesession```
+Использование: ```python parser.py startid endid userid folder moodlesession```
 
 **startid и endid** - начальный и конечный id'шники. Можете сами достать из адресной строки *(```/view3.php?chapterid=3828```)* или из таблицы ниже.
 
@@ -19,7 +17,7 @@ pip install lxml
 
 **folder** - название папки, куда сохранить все ваши решения (п. - '1 раздел') ***в кавычках***.
 
-**modulesession** - рандомная строка из куки. Вы должны скачать расширение EditThisCookie и получить значение 'MoodleSession'.
+**moodlesession** - рандомная строка из куки. Вы должны скачать расширение EditThisCookie и получить значение 'MoodleSession'.
 
 ### Таблица startid и endid по разделам
 
