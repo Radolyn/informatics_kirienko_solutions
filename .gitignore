@@ -108,3 +108,6 @@ venv.bak/
 
 # Session file
 session
+
+# Test folder
+test/

@@ -13,7 +13,7 @@ try:
     import pickle
     from utils import parse_argv, usage, get_user_details, load_cookies
 except:
-    print('Запустите сначала deps.py - установите зависимости.')
+    print('Запустите сначала deps.py - установите зависимости')
     exit(3)
 
 # Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением
@@ -78,7 +78,7 @@ if not os.path.exists(folder):
     os.makedirs(folder)
 
 if not os.path.exists('session'):
-    print('Запустите сначала getKey.py - получите ключ.')
+    print('Запустите сначала getKey.py - получите ключ')
     exit(420)
 
 # Загружаем куки
@@ -86,6 +86,12 @@ session.cookies = load_cookies()
 
 # Проверка на валидность
 userdata = get_user_details(session)
+
+if parsed['letter'] not in letters_list:
+    print('Хайповая буква, но максимум AZ')
+    exit(68)
+
+letter_offset = letters_list.index(parsed['letter'])
 
 if userdata == None:
     print('Токен истёк или невалиден. Получите новый с помощью getKey.py')
@@ -101,7 +107,7 @@ for i in range(start_id, end_id + 1, 1):
 
     # Для удобства номер задания обозначим как problem_id, а букву - letter
     problem_id = i
-    letter = letters_list[i - start_id + letters_list.index(parsed['letter'])]
+    letter = letters_list[i - start_id + letter_offset]
 
     # Получаем всю информацию по заданию
     url = 'https://informatics.mccme.ru/py/problem/%s/filter-runs?problem_id=%s&from_timestamp=-1&to_timestamp=-1&group_id=0&user_id=%s&lang_id=-1&status_id=-1&statement_id=0&count=10&with_comment=&page=1' % (
