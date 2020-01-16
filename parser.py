@@ -21,7 +21,7 @@ except:
 
 # Выводит всю отладочную информацию
 
-debug = True
+debug = False
 
 # Парсим аргументы из ком. строки
 parsed = parse_argv(sys.argv[1:])
