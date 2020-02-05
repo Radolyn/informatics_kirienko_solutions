@@ -6,7 +6,7 @@ i = 2
 
 while n % i != 0:
     i += 1
-    if i**2 > n:
+    if i ** 2 > n:
         print(n)
         exit()
 print(i)

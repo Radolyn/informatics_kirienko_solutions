@@ -21,4 +21,3 @@ while s:
 
     l.append(n)
     b += 1
-

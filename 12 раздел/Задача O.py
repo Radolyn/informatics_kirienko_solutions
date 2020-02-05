@@ -1,14 +1,16 @@
-# # 		Дан список из $N$ ($N \le 2 * 10^5$) элементов,которые принимают целые значения от 0 до 100.# 
+# 
+# 		Дан список из $N$ ($N \le 2 * 10^5$) элементов,которые принимают целые значения от 0 до 100.
+# 
 
 class informatics:
     @staticmethod
     def getInput():
         return int(input())
-    
+
     @staticmethod
     def getMultiInputList():
         return list(map(int, input().split()))
-    
+
     @staticmethod
     def getMultiInputOneLine():
         return map(int, input().split())
@@ -35,16 +37,16 @@ class informatics:
                 l.append(k.pop())
             k.append(f)
         return k
-    
+
     @staticmethod
     def BubbleSort(a):
         length = len(a)
-        for i in range(length-1):
-            for j in range(length-i-1):
-                if a[j] > a[j+1]:
-                    a[j], a[j+1] = a[j+1], a[j]
+        for i in range(length - 1):
+            for j in range(length - i - 1):
+                if a[j] > a[j + 1]:
+                    a[j], a[j + 1] = a[j + 1], a[j]
         return a
-    
+
     @staticmethod
     def CountSort(A):
         length = max(A) + 1
@@ -53,8 +55,9 @@ class informatics:
             b[i] += 1
         A[:] = []
         for i in range(length):
-            A += [i] * b[i] 
+            A += [i] * b[i]
         return A
-    
+
+
 # Zdarova
 print(*informatics.CountSort(informatics.getMultiInputList()))
