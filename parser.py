@@ -49,7 +49,9 @@ headers = {
 
 # Все букОвки от A до AZ (не бойтесь, я их сгенерировал за 3 строчки :D)
 
-letters_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ']
+letters_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+                'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM',
+                'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ']
 
 # Сколько всего скачано
 
@@ -58,8 +60,6 @@ passes = 0
 # Сессия для парсера
 
 session = requests.Session()
-
-
 
 print('''\
  _____       __                           _   _          
@@ -71,7 +71,6 @@ print('''\
                                                          
                                                          
                                                          ''')
-                                                         
 
 # Создаём папку
 if not os.path.exists(folder):
