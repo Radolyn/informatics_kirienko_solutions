@@ -111,3 +111,6 @@ session
 
 # Test folder
 test/
+
+# PyCharm
+.idea/
