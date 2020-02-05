@@ -22,14 +22,15 @@ if len(sys.argv) != 3:
     exit(2)
 
 with requests.Session() as session:
-    response = session.post('https://informatics.mccme.ru/login/index.php',
+    session.post('https://informatics.mccme.ru/login/index.php',
                             data={'username': sys.argv[1].lower(), 'password': sys.argv[2]}, headers=headers)
 
     response = session.get('https://informatics.mccme.ru/login/index.php')
 
     if 'Вы зашли под именем' in response.text:
-        print('Ваш токен: ' + session.cookies['MoodleSession'])
+        print('Авторизация сохранена. Теперь можно пользоваться парсером! (' + session.cookies['MoodleSession'] + ')')
         save_cookies(session.cookies)
         exit(0)
 
 print('Неверный логин или пароль. Ну или сервер упал.')
+exit(1)
