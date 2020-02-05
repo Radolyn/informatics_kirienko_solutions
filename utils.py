@@ -1,7 +1,8 @@
 import getopt
+import requests
 import json
-import pickle
 import sys
+import pickle
 
 
 def parse_argv(argv):
@@ -29,7 +30,6 @@ def parse_argv(argv):
     params['range'][1] = params['range'][1].isdigit() and int(params['range'][1]) or usage()
     return params
 
-
 def usage():
     print(
         '''
@@ -41,16 +41,13 @@ def usage():
     )
     sys.exit(2)
 
-
 def get_user_details(session):
     response = session.get('https://informatics.mccme.ru/py/rating/get', cookies=load_cookies())
     return json.loads(response.text)['current_user_data']
 
-
 def save_cookies(requests_cookiejar):
     with open('session', 'wb') as (f):
         pickle.dump(requests_cookiejar, f)
-
 
 def load_cookies():
     with open('session', 'rb') as (f):

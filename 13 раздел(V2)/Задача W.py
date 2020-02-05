@@ -1,6 +1,4 @@
-# 
-# 		Хорошо известна задача-шутка, в которой требуется продолжить числовой ряд:
-# 
+# # 		Хорошо известна задача-шутка, в которой требуется продолжить числовой ряд:# 
 
 e = int(input())
 
@@ -17,10 +15,10 @@ def Eval(n):
             index += 1
             while index < length and p[index] == p[start]:
                 index += 1
-            q = q + str(index - start) + p[start]
+            q = q + str(index-start) + p[start]
         n, p = n - 1, q
         seq.append(int(p))
     return seq
 
 
-print(Eval(e)[e - 1])
+print(Eval(e)[e-1])

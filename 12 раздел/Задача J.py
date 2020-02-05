@@ -1,16 +1,14 @@
-# 
-# 		В олимпиаде участвовало $N$ человек. Каждый получил определенное количество баллов, при этом оказалось,что у всех участников — разное число баллов.
-#   
+# # 		В олимпиаде участвовало $N$ человек. Каждый получил определенное количество баллов, при этом оказалось,что у всех участников — разное число баллов.#   
 
 class informatics:
     @staticmethod
     def getInput():
         return int(input())
-
+    
     @staticmethod
     def getMultiInputList():
         return list(map(int, input().split()))
-
+    
     @staticmethod
     def getMultiInputOneLine():
         return map(int, input().split())
@@ -27,7 +25,6 @@ class informatics:
                 j += 1
             l[i], l[m] = l[m], l[i]
         return l
-
 
 a, b = list(), list()
 

@@ -1,16 +1,14 @@
-# 
-# 		Дан список целых чисел. Отсортируйте его в порядке неубывания значений. Выведите полученный список на экран.
-#  
+# # 		Дан список целых чисел. Отсортируйте его в порядке неубывания значений. Выведите полученный список на экран.#  
 
 class informatics:
     @staticmethod
     def getInput():
         return int(input())
-
+    
     @staticmethod
     def getMultiInputList():
         return list(map(int, input().split()))
-
+    
     @staticmethod
     def getMultiInputOneLine():
         return map(int, input().split())
@@ -37,6 +35,5 @@ class informatics:
                 l.append(k.pop())
             k.append(f)
         return k
-
 
 print(*informatics.InsertionSort(informatics.getMultiInputList()))

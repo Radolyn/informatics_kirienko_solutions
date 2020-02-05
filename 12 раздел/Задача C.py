@@ -1,20 +1,17 @@
-# 
-# 		Дана последовательность чисел, состоящая только из чисел 1, ..., 9. Последовательность завершается числом 0. Каждое число записано в отдельной строке.
-#  
+# # 		Дана последовательность чисел, состоящая только из чисел 1, ..., 9. Последовательность завершается числом 0. Каждое число записано в отдельной строке.#  
 
 class informatics:
     @staticmethod
     def getInput():
         return int(input())
-
+    
     @staticmethod
     def getMultiInputList():
         return list(map(int, input().split()))
-
+    
     @staticmethod
     def getMultiInputOneLine():
         return map(int, input().split())
-
 
 l = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
