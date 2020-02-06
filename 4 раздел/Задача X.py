@@ -40,9 +40,9 @@ class Program
     for (var i = 1; i <= n; i++)
         {
             answer += Factorial(i);
-    }
-    Console.WriteLine(answer);
+        }
+        Console.WriteLine(answer);
 
-}
-}
-}
+    }
+    }
+    }

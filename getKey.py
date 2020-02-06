@@ -2,23 +2,15 @@ try:
     import requests
     import sys
     import pickle
-    from utils import save_cookies, debug
+    from utils import save_cookies, debug, headers
 except:
     print('Запустите сначала deps.py - установите зависимости.')
     exit(3)
 
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'DNT': '1',
-    'Upgrade-Insecure-Requests': '1',
-    'Origin': 'https://informatics.mccme.ru'
-}
-
 if len(sys.argv) != 3:
     print(
-        'Использование: getKey.py login password\nВаши данные никуда не отправляются, кроме костыльного сервера informatics.')
+        'Использование: getKey.py login password\n'
+        'Ваши данные никуда не отправляются, кроме костыльного сервера informatics.')
     exit(2)
 
 with requests.Session() as session:

@@ -7,7 +7,8 @@ ranges = [
         {'letter': 'A', 'range': '3443-3450', 'folder': '1 раздел'}
     ],
     [
-        {'letter': 'A', 'range': '3455-3535', 'folder': '2 раздел'}
+        {'letter': 'A', 'range': '3455-3483', 'folder': '2 раздел'},
+        {'letter': 'AD', 'range': '3535-3535', 'folder': '2 раздел'}
     ],
     [
         {'letter': 'A', 'range': '3501-3527', 'folder': '3 раздел'}

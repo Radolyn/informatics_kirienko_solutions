@@ -11,13 +11,15 @@ try:
     import sys
     import os
     import pickle
-    from utils import parse_argv, usage, get_user_details, load_cookies, debug
+    from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo
 except:
     print('Запустите сначала deps.py - установите зависимости')
     exit(3)
 
-# Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением
-# API у них не задокументировано *(я нашёл роуты, но не более: https://github.com/InformaticsMskRu/informatics-mccme-ru/blob/master/pynformatics/__init__.py), так что парсим 'грязно'
+# Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением API у них
+# не задокументировано *(я нашёл роуты, но не более:
+# https://github.com/InformaticsMskRu/informatics-mccme-ru/blob/master/pynformatics/__init__.py), так что парсим
+# 'грязно'
 
 # Парсим аргументы из ком. строки
 parsed = parse_argv(sys.argv[1:])
@@ -29,44 +31,17 @@ start_id = parsed['range'][0]
 end_id = parsed['range'][1]
 folder = parsed['folder']
 
-# Селектор
-
-desc_selector = '#content > table > tbody > tr:nth-child(2) > td:nth-child(2) > div > div > div:nth-child(11) > div.legend > p'
-
-# Заголовки
-
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-    'DNT': '1',
-    'Upgrade-Insecure-Requests': '1',
-    'Origin': 'https://informatics.mccme.ru'
-}
-
-# Все букОвки от A до AZ (не бойтесь, я их сгенерировал за 3 строчки :D)
-
-letters_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-                'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM',
-                'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ']
+# Селектор описания задания
+desc_selector = '#content > table > tbody > tr:nth-child(2) > td:nth-child(2) > div > div > div:nth-child(11) > ' \
+                'div.legend > p '
 
 # Сколько всего скачано
-
 passes = 0
 
 # Сессия для парсера
-
 session = requests.Session()
 
-print('''\
- _____       __                           _   _          
-|_   _|     / _|                         | | (_)         
-  | | _ __ | |_ ___  _ __ _ __ ___   __ _| |_ _  ___ ___ 
-  | || '_ \|  _/ _ \| '__| '_ ` _ \ / _` | __| |/ __/ __|
- _| || | | | || (_) | |  | | | | | | (_| | |_| | (__\__ \\
- \___/_| |_|_| \___/|_|  |_| |_| |_|\__,_|\__|_|\___|___/ parser by AlexeyZavar (1.0)
-                                                         
-                                                         
-                                                         ''')
+print_logo()
 
 # Создаём папку
 if not os.path.exists(folder):
@@ -98,11 +73,10 @@ print('Произошла авторизация, идём к выкачке\n\n
 user_id = user_data['id']
 
 # Главный кос... цикл
-for i in range(start_id, end_id + 1, 1):
+for problem_id in range(start_id, end_id + 1, 1):
 
-    # Для удобства номер задания обозначим как problem_id, а букву - letter
-    problem_id = i
-    letter = letters_list[i - start_id + letter_offset]
+    # Для удобства обозначим букву как letter
+    letter = letters_list[problem_id - start_id + letter_offset]
 
     # Получаем всю информацию по заданию
     url = 'https://informatics.mccme.ru/py/problem/%s/filter-runs?problem_id=%s&from_timestamp=-1&to_timestamp=-1' \
@@ -227,8 +201,5 @@ for i in range(start_id, end_id + 1, 1):
     print('Класс работает, ставлю ржомбу. (%s, %i)\n\n' % (letter, problem_id))
 
     passes += 1
-
-    # Автозагрузчик заданий потом сделаем
-    # '/py/problem/problem_id/submit'
 
 print('\n\nПриколов скачано: ' + str(passes) + ' из ' + str(abs(start_id - end_id) + 1))
