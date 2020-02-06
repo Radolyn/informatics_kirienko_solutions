@@ -2,7 +2,7 @@ try:
     import requests
     import sys
     import pickle
-    from utils import save_cookies
+    from utils import save_cookies, debug
 except:
     print('Запустите сначала deps.py - установите зависимости.')
     exit(3)
@@ -28,7 +28,9 @@ with requests.Session() as session:
     response = session.get('https://informatics.mccme.ru/login/index.php')
 
     if 'Вы зашли под именем' in response.text:
-        print('Авторизация сохранена. Теперь можно пользоваться парсером! (' + session.cookies['MoodleSession'] + ')')
+        print('Авторизация сохранена. Теперь можно пользоваться парсером!')
+        if debug:
+            print(session.cookies['MoodleSession'])
         save_cookies(session.cookies)
         exit(0)
 

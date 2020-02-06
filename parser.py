@@ -11,17 +11,13 @@ try:
     import sys
     import os
     import pickle
-    from utils import parse_argv, usage, get_user_details, load_cookies
+    from utils import parse_argv, usage, get_user_details, load_cookies, debug
 except:
     print('Запустите сначала deps.py - установите зависимости')
     exit(3)
 
 # Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением
 # API у них не задокументировано *(я нашёл роуты, но не более: https://github.com/InformaticsMskRu/informatics-mccme-ru/blob/master/pynformatics/__init__.py), так что парсим 'грязно'
-
-# Выводит всю отладочную информацию
-
-debug = False
 
 # Парсим аргументы из ком. строки
 parsed = parse_argv(sys.argv[1:])

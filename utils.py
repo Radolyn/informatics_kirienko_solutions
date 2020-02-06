@@ -3,6 +3,9 @@ import json
 import pickle
 import sys
 
+# Выводит всю отладочную информацию
+debug = True
+
 
 def parse_argv(argv):
     try:
@@ -39,6 +42,8 @@ def usage():
         Если --letter не указано, по умолчанию используется A
         '''
     )
+    if debug:
+        print(sys.argv)
     sys.exit(2)
 
 
