@@ -2,7 +2,5 @@
 # символ код
 
 
-
-
 for i in range(33, 127):
     print('%s %s' % (chr(i), str(i)))

@@ -2,7 +2,6 @@
 # Помогите ему это сделать.
 
 
-
 inputList = input().split()
 b = int(input())
 

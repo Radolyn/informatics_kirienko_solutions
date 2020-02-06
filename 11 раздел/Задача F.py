@@ -5,15 +5,15 @@
 #    
 
 
-
 class informatics:
     @staticmethod
     def getInput():
         return int(input())
-    
+
     @staticmethod
     def getMultiInput():
         return map(int, input().split())
+
 
 x, y, x2, y2 = informatics.getMultiInput()
 

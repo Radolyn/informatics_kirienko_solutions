@@ -5,15 +5,16 @@
 # 
 
 
-
 a = 0
 b = 0
 
 s = True
 
+
 def calc(a, b):
     print(a / b)
     exit()
+
 
 while s:
     n = int(input())
@@ -23,4 +24,3 @@ while s:
         break
 
     b += 1
-

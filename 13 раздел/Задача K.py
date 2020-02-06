@@ -2,5 +2,4 @@
 #  
 
 
-
 print(eval(input()))

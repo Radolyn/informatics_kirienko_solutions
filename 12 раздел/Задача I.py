@@ -1,17 +1,15 @@
 # 		В обувном магазине продается обувь разного размера.Известно, что одну пару обуви можно надеть на другую,если она хотя бы на три размера больше. В магазин пришел покупатель.Требуется определить, какое наибольшее количество пар обуви сможет предложить ему продавец так, чтобы он смог надеть их все одновременно.
 
 
-
-
 class informatics:
     @staticmethod
     def getInput():
         return int(input())
-    
+
     @staticmethod
     def getMultiInputList():
         return list(map(int, input().split()))
-    
+
     @staticmethod
     def getMultiInputOneLine():
         return map(int, input().split())
@@ -38,16 +36,16 @@ class informatics:
                 l.append(k.pop())
             k.append(f)
         return k
-    
+
     @staticmethod
     def BubbleSort(a):
         length = len(a)
-        for i in range(length-1):
-            for j in range(length-i-1):
-                if a[j] > a[j+1]:
-                    a[j], a[j+1] = a[j+1], a[j]
+        for i in range(length - 1):
+            for j in range(length - i - 1):
+                if a[j] > a[j + 1]:
+                    a[j], a[j + 1] = a[j + 1], a[j]
         return a
-    
+
     @staticmethod
     def CountSort(A):
         length = max(A) + 1
@@ -56,9 +54,10 @@ class informatics:
             b[i] += 1
         A[:] = []
         for i in range(length):
-            A += [i] * b[i] 
+            A += [i] * b[i]
         return A
-    
+
+
 size = informatics.getInput()
 sizes = informatics.getMultiInputList()
 
@@ -73,5 +72,5 @@ for item in sizes:
     else:
         newSize = item + 3
         counter += 1
-        
+
 print(counter)

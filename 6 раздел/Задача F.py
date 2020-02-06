@@ -5,8 +5,8 @@
 # ни разу, выведите число -2.
 
 
-
 text = input()
+
 
 def counter(text2):
     f = 0

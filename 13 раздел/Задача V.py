@@ -2,7 +2,6 @@
 # 
 
 
-
 import ipaddress
 
 ip = input()

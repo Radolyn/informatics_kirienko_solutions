@@ -2,7 +2,6 @@
 # элементы полученного списка.
 
 
-
 inputList = reversed(input().split())
 
 for i in inputList:

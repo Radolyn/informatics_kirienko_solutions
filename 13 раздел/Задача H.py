@@ -2,7 +2,6 @@
 # 
 
 
-
 def ToLower(s):
     return s.lower()
 

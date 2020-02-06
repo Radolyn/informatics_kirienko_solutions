@@ -2,10 +2,9 @@
 # реализованного без использования рекурсии. 
 
 
-
 a = int(input())
 b = int(input())
 
 while b != 0:
-    a, b = b, a % b    
+    a, b = b, a % b
 print(a)

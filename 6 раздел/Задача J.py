@@ -2,7 +2,6 @@
 # one.
 
 
-
 text = input()
 
 text = text.replace('1', 'one')

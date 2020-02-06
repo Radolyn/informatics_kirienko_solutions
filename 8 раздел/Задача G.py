@@ -2,15 +2,16 @@
 # других числа \(p\) и \(q\) таких, что \(\frac{n}{m}=\frac{p}{q}\) и дробь \(\frac{p}{q}\) — несократимая.
 
 
-
 import math
 
-def ReduceFraction(n, m):
-  z = math.gcd(n, m)
 
-  n //= z
-  m //= z
-  return (n, m)
+def ReduceFraction(n, m):
+    z = math.gcd(n, m)
+
+    n //= z
+    m //= z
+    return (n, m)
+
 
 a, b = int(input()), int(input())
 

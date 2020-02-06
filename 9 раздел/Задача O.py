@@ -4,12 +4,9 @@
 # последний элемент переходит на место A[0]).
 
 
-
 l = list(map(int, input().split()))
 
-
 a = l[-1:] + l[:-1]
-
 
 for i in range(len(a)):
     print(a[i], end=' ')

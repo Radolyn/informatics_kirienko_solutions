@@ -8,7 +8,6 @@
 # 
 
 
-
 a, b, c, d, e, f = int(input()), int(input()), int(
     input()), int(input()), int(input()), int(input())
 
@@ -40,6 +39,5 @@ check = (a // f) * (b // e) * (c // d)
 
 if check > result:
     result = check
-
 
 print(result)

@@ -2,7 +2,6 @@
 #  
 
 
-
 class informatics:
     @staticmethod
     def getInput():
@@ -43,10 +42,11 @@ class informatics:
     def Resheto():
         N = 100000
         s = set(range(1, N, 2))
-        for i in range(2, int(N** .5)):
+        for i in range(2, int(N ** .5)):
             if i in s:
-                s -= set(range(i*i, N, i))
+                s -= set(range(i * i, N, i))
         return s
+
 
 er = list(informatics.Resheto())
 er.insert(1, 2)

@@ -3,20 +3,18 @@
 # числа \(y\) и \(z\) натуральные, дробь \(\frac yz\) — правильная несократимая).
 
 
-
 import math
 
 a, b, c, d = map(int, input().split(' '))
 
-x = a*d + b*c
-y = b*d
+x = a * d + b * c
+y = b * d
 z = math.gcd(x, y)
 
 x //= z
 y //= z
 
 r = 0
-
 
 if abs(x / y) >= 1:
     r = abs(x) // abs(y)
@@ -27,17 +25,17 @@ if abs(x / y) >= 1:
 
 if y < 0 and x > 0:
     y = abs(y)
-    x -= x*2
+    x -= x * 2
 elif y < 0 and r != 0:
     y = abs(y)
     if r < 0:
         r = abs(r)
     else:
-        r -= r*2
+        r -= r * 2
 
 if x < 0 and r > 0:
     x = abs(x)
-    r -= r*2
+    r -= r * 2
 
 if r != 0 and x != 0:
     print(r, str(x) + '/' + str(y))

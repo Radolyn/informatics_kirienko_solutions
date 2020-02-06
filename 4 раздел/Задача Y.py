@@ -3,12 +3,11 @@
 # k раз: 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, ... 
 
 
-
 n = int(input())
 
 b = 1
 
 for i in range(1, n + 1):
     print(b)
-    if i == b*(b + 1) // 2:
+    if i == b * (b + 1) // 2:
         b += 1

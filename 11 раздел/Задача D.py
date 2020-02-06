@@ -2,16 +2,16 @@
 # Выведите все его простые натуральные делители с учетом кратности. Алгоритм должен иметь сложность \(O(\sqrt{n})\).
 
 
-
 def isPrime(n):
     if n == 2:
         return True
     i = 2
     while n % i != 0:
         i += 1
-        if i**2 > n:
+        if i ** 2 > n:
             return True
     return False
+
 
 n = int(input())
 

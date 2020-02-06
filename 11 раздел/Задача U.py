@@ -5,17 +5,14 @@
 # Обратите внимание на то, что 100000-е простое число не является числом 100000.
 
 
-
-
-import math
-
 def p():
     N = 100000
     s = set(range(1, N, 2))
-    for i in range(2, int(N** .5)):
+    for i in range(2, int(N ** .5)):
         if i in s:
-            s -= set(range(i*i, N, i))
+            s -= set(range(i * i, N, i))
     return s
+
 
 er = list(p())
 er.insert(1, 2)

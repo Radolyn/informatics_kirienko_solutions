@@ -4,7 +4,6 @@
 #    
 
 
-
 n = int(input())
 print("+".join("{}*{}".format(k, k + 1) for k in range(1, n)), end="=")
 print(sum(k * (k + 1) for k in range(1, n)))

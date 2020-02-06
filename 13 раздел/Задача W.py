@@ -2,7 +2,6 @@
 # 
 
 
-
 y = int(input())
 
 

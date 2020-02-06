@@ -3,7 +3,6 @@
 # 
 
 
-
 l = list(map(int, input().split()))
 num = int(input())
 

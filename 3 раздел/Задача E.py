@@ -2,11 +2,9 @@
 # 
 
 
-
 a = int(input())
 b = int(input())
 c = int(input())
-
 
 m = a if a > b else b
 print(m if m > c else c)

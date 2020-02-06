@@ -2,7 +2,6 @@
 # (то есть A[0], A[2], A[4], ...).
 
 
-
 inputList = list(map(int, input().split(" ")))
 
 List = list()

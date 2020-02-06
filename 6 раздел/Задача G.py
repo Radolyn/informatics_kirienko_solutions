@@ -3,7 +3,6 @@
 # а также все символы, находящиеся между ними.
 
 
-
 text = input()
 
 text = text[:text.find('h')] + text[text.rfind('h') + 1:]

@@ -4,7 +4,6 @@
 # их на экран.
 
 
-
 a, b = map(int, input().split('.'))
 
 print(a, b)

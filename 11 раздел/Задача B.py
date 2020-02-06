@@ -6,14 +6,15 @@
 # \(НОД(a,b)=НОД(a-b,b)\), если \(a\) и \(b\) нечетные, \(a\ge b\).
 
 
-
 a = int(input())
 b = int(input())
+
 
 def divide_to_min(num):
     while num % 2 == 0:
         num /= 2
     return num
+
 
 def algo(a, b):
     k = 1
@@ -35,5 +36,6 @@ def algo(a, b):
         else:
             b -= a
     return b * k
+
 
 print(int(algo(a, b)))

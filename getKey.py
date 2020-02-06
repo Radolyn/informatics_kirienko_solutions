@@ -23,7 +23,7 @@ if len(sys.argv) != 3:
 
 with requests.Session() as session:
     session.post('https://informatics.mccme.ru/login/index.php',
-                            data={'username': sys.argv[1].lower(), 'password': sys.argv[2]}, headers=headers)
+                 data={'username': sys.argv[1].lower(), 'password': sys.argv[2]}, headers=headers)
 
     response = session.get('https://informatics.mccme.ru/login/index.php')
 

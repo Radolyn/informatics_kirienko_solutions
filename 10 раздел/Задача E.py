@@ -3,10 +3,9 @@
 # несколько - выведите первую пару.
 
 
-
 inputList = list(map(int, input().split(" ")))
 
-for i in range(len(inputList)-1):
+for i in range(len(inputList) - 1):
     a = int(inputList[i])
     b = int(inputList[i + 1])
     if 0 < (a * b):

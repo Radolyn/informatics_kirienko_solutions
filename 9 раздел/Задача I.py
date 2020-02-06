@@ -2,10 +2,9 @@
 # нет нечетных элементов - выведите число 0.
 
 
-
 inputList = input().split()
 
-maxint = 2**63
+maxint = 2 ** 63
 
 a = maxint
 

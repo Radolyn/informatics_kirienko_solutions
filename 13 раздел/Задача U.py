@@ -2,7 +2,6 @@
 #    
 
 
-
 text = input()
 
 

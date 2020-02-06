@@ -4,9 +4,7 @@
 # h, в противоположном порядке.
 
 
-
 text = input()
-
 
 text1 = text[:text.find('h')]
 
@@ -14,7 +12,6 @@ text2 = text[text.find('h'):text.rfind('h') + 1]
 
 text3 = text[text.rfind('h') + 1:]
 
-
-text = text1 + text2[::-1] + text3 # reverse + add left & right positions
+text = text1 + text2[::-1] + text3  # reverse + add left & right positions
 
 print(text)

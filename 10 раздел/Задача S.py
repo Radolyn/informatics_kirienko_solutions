@@ -4,7 +4,6 @@
 #    
 
 
-
 l = list(map(int, input().split()))
 
 a = 0

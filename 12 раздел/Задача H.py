@@ -2,7 +2,6 @@
 # 
 
 
-
 class informatics:
     @staticmethod
     def getInput():

@@ -2,19 +2,19 @@
 # 
 
 
-
 class informatics:
     @staticmethod
     def getInput():
         return int(input())
-    
+
     @staticmethod
     def getMultiInputList():
         return list(map(int, input().split()))
-    
+
     @staticmethod
     def getMultiInput():
         return map(int, input().split())
+
 
 l = informatics.getMultiInputList()
 
@@ -26,4 +26,3 @@ for i in range(len(l)):
         m = l[i]
         index = i
 print(m, index)
-    

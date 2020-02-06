@@ -3,19 +3,20 @@
 # только +1 и -1. Также нельзя использовать циклы.
 
 
-
 s = 0
 
+
 def sum(a, b):
-  global s
-  if a != 0:
-    s += 1
-    a -= 1
-  if b != 0:
-    s += 1
-    b -= 1
-  if a != 0 or b != 0:
-    sum(a, b)
+    global s
+    if a != 0:
+        s += 1
+        a -= 1
+    if b != 0:
+        s += 1
+        b -= 1
+    if a != 0 or b != 0:
+        sum(a, b)
+
 
 a, b = int(input()), int(input())
 

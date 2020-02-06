@@ -4,13 +4,11 @@
 #    
 
 
-
 n = int(input())
 
 a = '+___ '
 b = '|__\\ '
 c = '|    '
-
 
 print(a * n)
 for i in range(1, n + 1):

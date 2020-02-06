@@ -2,7 +2,6 @@
 # Используйте для решения задачи метод count.
 
 
-
 text = input()
 
 print(text.count(' ') + 1)

@@ -2,10 +2,9 @@
 # то есть \(\frac{n!}{k!(n-k)!}\).
 
 
-
 import math
 
 n = int(input())
 k = int(input())
 
-print(math.factorial(n)//(math.factorial(k) * math.factorial(n - k)))
+print(math.factorial(n) // (math.factorial(k) * math.factorial(n - k)))

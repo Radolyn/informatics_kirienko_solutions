@@ -2,7 +2,6 @@
 # 
 
 
-
 class informatics:
     @staticmethod
     def getInput():
@@ -42,10 +41,10 @@ class informatics:
     @staticmethod
     def BubbleSort(a):
         length = len(a)
-        for i in range(length-1):
-            for j in range(length-i-1):
-                if a[j] > a[j+1]:
-                    a[j], a[j+1] = a[j+1], a[j]
+        for i in range(length - 1):
+            for j in range(length - i - 1):
+                if a[j] > a[j + 1]:
+                    a[j], a[j + 1] = a[j + 1], a[j]
         return a
 
     @staticmethod

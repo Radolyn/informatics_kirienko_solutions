@@ -3,10 +3,6 @@
 # в час. На какой отметке он остановится через \(t\) часов?
 
 
-
-
-import math
-
 x, y = int(input()), int(input())
 z = (x * y) % 109
 print(z)
