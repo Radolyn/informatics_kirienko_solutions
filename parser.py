@@ -48,7 +48,7 @@ if not os.path.exists(folder):
     os.makedirs(folder)
 
 if not os.path.exists('session'):
-    print('Запустите сначала getKey.py - получите ключ')
+    print('Запустите сначала authorize.py - получите ключ.')
     exit(420)
 
 # Загружаем куки
@@ -64,11 +64,11 @@ if parsed['letter'] not in letters_list:
 letter_offset = letters_list.index(parsed['letter'])
 
 if user_data is None:
-    print('Токен истёк или невалиден. Получите новый с помощью getKey.py')
+    print('Токен истёк или невалиден. Получите новый с помощью authorize.py')
     exit(4)
 
 print('Доброго времени суток, ' + user_data['name'])
-print('Произошла авторизация, идём к выкачке\n\n')
+print('Произошла авторизация, идём к выкачке.\n\n')
 
 user_id = user_data['id']
 
@@ -89,10 +89,10 @@ for problem_id in range(start_id, end_id + 1, 1):
     if debug:
         print(response.text)
     if data['result'] != 'success':
-        print('Прикол не работает, идём дальше')
+        print('Прикол не работает, идём дальше.')
         continue
 
-    print('Прикол работает')
+    print('Прикол работает.')
 
     print('Получаем удачные run\'ы...')
 
@@ -104,7 +104,7 @@ for problem_id in range(start_id, end_id + 1, 1):
             success_runs.append(item)
 
     if len(success_runs) == 0:
-        print('Прикол удачных run\'ов нет\n\n')
+        print('Прикол удачных run\'ов нет.\n\n')
         continue
 
     if debug:

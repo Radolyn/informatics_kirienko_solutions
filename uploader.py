@@ -14,7 +14,7 @@ try:
     from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, upload, \
         print_logo
 except:
-    print('Запустите сначала deps.py - установите зависимости')
+    print('Запустите сначала deps.py - установите зависимости.')
     exit(3)
 
 # Парсим аргументы из ком. строки
@@ -28,15 +28,15 @@ end_id = parsed['range'][1]
 folder = parsed['folder']
 
 if parsed['letter'] not in letters_list:
-    print('Хайповая буква, но максимум AZ')
+    print('Хайповая буква, но максимум AZ.')
     exit(68)
 
 if not os.path.exists('session'):
-    print('Запустите сначала getKey.py - получите ключ')
+    print('Запустите сначала authorize.py - получите ключ.')
     exit(420)
 
 if not os.path.exists(folder):
-    print('Папка находится в другой вселенной')
+    print('Папка находится в другой вселенной.')
     exit(96)
 
 letter_offset = letters_list.index(parsed['letter'])

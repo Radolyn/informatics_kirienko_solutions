@@ -9,7 +9,7 @@ except:
 
 if len(sys.argv) != 3:
     print(
-        'Использование: getKey.py login password\n'
+        'Использование: authorize.py login password.\n'
         'Ваши данные никуда не отправляются, кроме костыльного сервера informatics.')
     exit(2)
 
