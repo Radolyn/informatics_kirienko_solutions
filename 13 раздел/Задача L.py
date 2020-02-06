@@ -2,4 +2,18 @@
 # 
 
 
-print(eval(input()))
+def Eval(S):
+    res = 0
+    if S.count('+') != 0:
+        a, b = S.split('+')
+        res = int(a) + int(b)
+    if S.count('-') != 0:
+        a, b = S.split('-')
+        res = int(a) - int(b)
+    if S.count('*') != 0:
+        a, b = S.split('*')
+        res = int(a) * int(b)
+    return res
+
+
+print(Eval(input()))

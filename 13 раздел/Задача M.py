@@ -20,7 +20,6 @@ def CaesarCipherChar(c, k):
     else:
         return alphabet[d + k - l].upper()
 
-
 def CaesarCipher(s, k):
     for item in s:
         yield CaesarCipherChar(item, k)
