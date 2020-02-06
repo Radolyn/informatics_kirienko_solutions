@@ -213,12 +213,17 @@ for i in range(start_id, end_id + 1, 1):
     # Сохраняем описание + исходный код
     f = open(folder + "\\Задача %s.py" % letter, "w+", encoding='utf-8', newline='\n')
 
-    #
-    f.write('# ')
     # У описания новые строки заменяем на '# ', чтобы было однородней
-    f.write(desc.replace('\n', '# '))
     # Костыль.нет
-    f.write('\n\n')
+    desc = '# ' + desc
+    desc = desc.replace('\r\n', '\n# ')
+    desc = desc.replace('# \n', '')
+    desc = desc.replace('# # ', '# ')
+    desc = desc.replace('#     ', '')
+    desc = desc.replace('\n\n', '')
+    f.write(desc)
+    # Костыль.нет 2
+    f.write('\n\n\n\n')
     f.write(source.replace('\r\n', '\n'))
 
     f.close()
