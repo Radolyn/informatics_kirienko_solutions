@@ -84,7 +84,7 @@ if not os.path.exists('session'):
 session.cookies = load_cookies()
 
 # Проверка на валидность
-userdata = get_user_details(session)
+user_data = get_user_details(session)
 
 if parsed['letter'] not in letters_list:
     print('Хайповая буква, но максимум AZ')
@@ -92,14 +92,14 @@ if parsed['letter'] not in letters_list:
 
 letter_offset = letters_list.index(parsed['letter'])
 
-if userdata == None:
+if user_data is None:
     print('Токен истёк или невалиден. Получите новый с помощью getKey.py')
     exit(4)
 
-print('Доброго времени суток, ' + userdata['name'])
+print('Доброго времени суток, ' + user_data['name'])
 print('Произошла авторизация, идём к выкачке\n\n')
 
-user_id = userdata['id']
+user_id = user_data['id']
 
 # Главный кос... цикл
 for i in range(start_id, end_id + 1, 1):
@@ -109,15 +109,16 @@ for i in range(start_id, end_id + 1, 1):
     letter = letters_list[i - start_id + letter_offset]
 
     # Получаем всю информацию по заданию
-    url = 'https://informatics.mccme.ru/py/problem/%s/filter-runs?problem_id=%s&from_timestamp=-1&to_timestamp=-1&group_id=0&user_id=%s&lang_id=-1&status_id=-1&statement_id=0&count=10&with_comment=&page=1' % (
-        problem_id, problem_id, user_id)
+    url = 'https://informatics.mccme.ru/py/problem/%s/filter-runs?problem_id=%s&from_timestamp=-1&to_timestamp=-1' \
+          '&group_id=0&user_id=%s&lang_id=-1&status_id=-1&statement_id=0&count=10&with_comment=&page=1' % (
+              problem_id, problem_id, user_id)
 
     response = session.get(url, cookies=load_cookies())
     data = json.loads(response.text)
 
     if debug:
         print(response.text)
-    if (data['result'] != 'success'):
+    if data['result'] != 'success':
         print('Прикол не работает, идём дальше')
         continue
 
@@ -169,7 +170,7 @@ for i in range(start_id, end_id + 1, 1):
         print(source)
 
     # Парсим описание. На самом деле, это для поисковиков, чтобы лучше индексировали :)
-    desc_url = 'https://informatics.mccme.ru/mod/statements/view3.php?id=%s' % problem_id
+    desc_url = 'https://informatics.mccme.ru/mod/statements/view3.php?chapterid=%s' % problem_id
 
     page = session.get(desc_url)
 
@@ -180,9 +181,9 @@ for i in range(start_id, end_id + 1, 1):
     # Описание может быть просто в div'е legend, а может быть обёрнуто в параграф
     desc = soup.find('div', {'class': 'legend'})
 
-    if desc == None:
+    if desc is None:
         print('Ржомба не сработала, продолжаем флексить')
-        desc_url = 'https://informatics.mccme.ru/mod/statements/view3.php?chapterid=%s' % problem_id
+        desc_url = 'https://informatics.mccme.ru/mod/statements/view3.php?id=%s' % problem_id
 
         page = session.get(desc_url)
 
@@ -191,17 +192,17 @@ for i in range(start_id, end_id + 1, 1):
             print(soup)
         desc = soup.find('div', {'class': 'legend'}).find('p')
 
-        if desc == None:
+        if desc is None:
             print('Ржомба не сработала, включаем flex air')
             desc = soup.find('div', {'class': 'legend'}).text
-            if desc == None:
+            if desc is None:
                 print('Ржомба не сработала, вырубаем ютуб\n\n')
                 continue
         else:
             desc = desc.text
     else:
         desc = soup.find('div', {'class': 'legend'}).find('p')
-        if desc == None:
+        if desc is None:
             desc = soup.find('div', {'class': 'legend'}).text
         else:
             desc = desc.text
@@ -210,7 +211,7 @@ for i in range(start_id, end_id + 1, 1):
         print(desc)
 
     # Сохраняем описание + исходный код
-    f = open(folder + "\Задача %s.py" % letter, "w+", encoding='utf-8', newline='\n')
+    f = open(folder + "\\Задача %s.py" % letter, "w+", encoding='utf-8', newline='\n')
 
     #
     f.write('# ')
