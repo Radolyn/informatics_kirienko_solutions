@@ -192,6 +192,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     desc = desc.replace('#     ', '')
     desc = desc.replace('\n\n', '')
     desc = desc.replace('	', '')
+    desc = desc.replace('#  ', '')
     f.write(desc)
     # Костыль.нет 2
     f.write('\n\n\n\n')
