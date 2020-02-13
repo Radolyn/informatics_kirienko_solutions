@@ -12,7 +12,7 @@ try:
     import os
     import pickle
     from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, upload, \
-        print_logo
+        print_logo, waitS
 except:
     print('Запустите сначала deps.py - установите зависимости.')
     exit(3)
@@ -52,6 +52,13 @@ session.cookies = load_cookies()
 # Проверка на валидность
 user_data = get_user_details(session)
 
+if user_data is None:
+    print('Токен истёк или невалиден. Получите новый с помощью authorize.py')
+    exit(4)
+    
+print('Доброго времени суток, ' + user_data['name'])
+print('Произошла авторизация, идём к списыванию.\n\n')
+
 # Главный кос... цикл
 for problem_id in range(start_id, end_id + 1, 1):
     # Для удобства обозначим букву как letter
@@ -71,5 +78,7 @@ for problem_id in range(start_id, end_id + 1, 1):
 
     print('Задача списана успешно. (%s, %i)\n\n' % (letter, problem_id))
     passes += 1
+    
+    waitS()
 
 print('\n\nПриколов отправлено: ' + str(passes) + ' из ' + str(abs(start_id - end_id) + 1))

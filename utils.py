@@ -3,11 +3,16 @@ import json
 import os
 import pickle
 import sys
+import time
+from random import uniform
 
 import requests
 
 # Выводит всю отладочную информацию
 debug = True
+
+# Включает рандомную паузу между запросами
+random_wait = True
 
 # Заголовки
 headers = {
@@ -165,3 +170,11 @@ def upload(problem_id, file):
         if j['status'] != 'success':
             return False
         return True
+
+def waitS():
+    if not random_wait:
+        return
+    sleep_time = uniform(0, 1)
+    time.sleep(sleep_time)
+    if debug:
+        print('Произошла пауза в ' + str(sleep_time) + ' sec')

@@ -11,7 +11,7 @@ try:
     import sys
     import os
     import pickle
-    from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo
+    from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo,  waitS
 except:
     print('Запустите сначала deps.py - установите зависимости')
     exit(3)
@@ -202,5 +202,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     print('Класс работает, ставлю ржомбу. (%s, %i)\n\n' % (letter, problem_id))
 
     passes += 1
+    
+    waitS()
 
 print('\n\nПриколов скачано: ' + str(passes) + ' из ' + str(abs(start_id - end_id) + 1))
