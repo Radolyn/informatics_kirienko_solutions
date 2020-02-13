@@ -114,3 +114,6 @@ test/
 
 # PyCharm
 .idea/
+
+# Test file
+test.py
