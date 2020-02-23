@@ -16,10 +16,11 @@ except:
     print('Запустите сначала deps.py - установите зависимости')
     exit(3)
 
-# Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением API у них
-# не задокументировано *(я нашёл роуты, но не более:
+# Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением.
+# API у них не задокументировано *(я нашёл роуты, но не более:
 # https://github.com/InformaticsMskRu/informatics-mccme-ru/blob/master/pynformatics/__init__.py), так что парсим
 # 'грязно'
+# UPD: класс, парни шарят за REST API (они даже не сделали роут для получения информации о задании)
 
 # Парсим аргументы из ком. строки
 parsed = parse_argv(sys.argv[1:])
@@ -194,6 +195,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     desc = desc.replace('\n\n', '')
     desc = desc.replace('	', '')
     desc = desc.replace('# \n', '')
+    desc = desc.replace('#  \n', '')
     f.write(desc)
     # Костыль.нет 2
     f.write('\n\n\n\n')
