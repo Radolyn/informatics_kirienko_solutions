@@ -52,7 +52,9 @@ if not os.path.exists('session'):
     exit(420)
 
 # Загружаем куки
-session.cookies = load_cookies()
+cookies_cached = load_cookies()
+
+session.cookies = cookies_cached
 
 # Проверка на валидность
 user_data = get_user_details(session)
@@ -83,7 +85,7 @@ for problem_id in range(start_id, end_id + 1, 1):
           '&group_id=0&user_id=%s&lang_id=-1&status_id=-1&statement_id=0&count=10&with_comment=&page=1' % (
               problem_id, problem_id, user_id)
 
-    response = session.get(url, cookies=load_cookies())
+    response = session.get(url, cookies=cookies_cached)
     data = json.loads(response.text)
 
     if debug:
@@ -121,7 +123,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     # Парсим исходный код
     source_url = 'https://informatics.mccme.ru/py/problem/run/%i/source' % run['id']
 
-    response = session.get(source_url, cookies=load_cookies())
+    response = session.get(source_url, cookies=cookies_cached)
     data = json.loads(response.text)
 
     # Если не смогли - идём к след. заданию
@@ -187,11 +189,11 @@ for problem_id in range(start_id, end_id + 1, 1):
     # Костыль.нет
     desc = '# ' + desc
     desc = desc.replace('\r\n', '\n# ')
-    desc = desc.replace('# \n', '')
     desc = desc.replace('# # ', '# ')
     desc = desc.replace('#     ', '')
     desc = desc.replace('\n\n', '')
     desc = desc.replace('	', '')
+    desc = desc.replace('# \n', '')
     f.write(desc)
     # Костыль.нет 2
     f.write('\n\n\n\n')

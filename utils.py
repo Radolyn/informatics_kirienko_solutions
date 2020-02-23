@@ -9,7 +9,7 @@ from random import uniform
 import requests
 
 # Выводит всю отладочную информацию
-debug = True
+debug = False
 
 # Включает рандомную паузу между запросами
 random_wait = True

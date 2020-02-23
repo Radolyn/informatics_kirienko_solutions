@@ -109,11 +109,10 @@ venv.bak/
 # Session file
 session
 
-# Test folder
-test/
-
 # PyCharm
 .idea/
 
-# Test file
+# Test file & folder
 test.py
+test/
+'test'/
