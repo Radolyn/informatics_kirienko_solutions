@@ -89,14 +89,14 @@ ranges = [
 
 def print_logo():
     print('''\
- _____       __                           _   _          
-|_   _|     / _|                         | | (_)         
-  | | _ __ | |_ ___  _ __ _ __ ___   __ _| |_ _  ___ ___ 
+ _____       __                           _   _
+|_   _|     / _|                         | | (_)
+  | | _ __ | |_ ___  _ __ _ __ ___   __ _| |_ _  ___ ___
   | || '_ \|  _/ _ \| '__| '_ ` _ \ / _` | __| |/ __/ __|
  _| || | | | || (_) | |  | | | | | | (_| | |_| | (__\__ \\
  \___/_| |_|_| \___/|_|  |_| |_| |_|\__,_|\__|_|\___|___/ parser by AlexeyZavar (1.3)
-                                                         
-                                                         
+
+
                                                          ''')
 
 
@@ -121,8 +121,10 @@ def parse_argv(argv):
             params['letter'] = arg
     if params['folder'] == '' or params['range'] == []:
         usage()
-    params['range'][0] = params['range'][0].isdigit() and int(params['range'][0]) or usage()
-    params['range'][1] = params['range'][1].isdigit() and int(params['range'][1]) or usage()
+    params['range'][0] = params['range'][0].isdigit() and int(
+        params['range'][0]) or usage()
+    params['range'][1] = params['range'][1].isdigit() and int(
+        params['range'][1]) or usage()
     return params
 
 
@@ -141,7 +143,8 @@ def usage():
 
 
 def get_user_details(session):
-    response = session.get('https://informatics.mccme.ru/py/rating/get', cookies=load_cookies())
+    response = session.get(
+        'https://informatics.mccme.ru/py/rating/get', cookies=load_cookies())
     return json.loads(response.text)['current_user_data']
 
 
@@ -159,7 +162,8 @@ def upload(problem_id, file):
     if not os.path.exists(file):
         return False
     with open(file, 'rb') as f:
-        headers['Referer'] = 'https://informatics.mccme.ru/mod/statements/view.php?id=' + str(problem_id)
+        headers['Referer'] = 'https://informatics.mccme.ru/mod/statements/view.php?id=' + \
+                             str(problem_id)
         response = requests.post('https://informatics.mccme.ru/py/problem/' + str(problem_id) + '/submit',
                                  files=dict(file=f), cookies=load_cookies(), headers=headers, data=dict(lang_id=27))
         if debug:
@@ -170,6 +174,7 @@ def upload(problem_id, file):
         if j['status'] != 'success':
             return False
         return True
+
 
 def waitS():
     if not random_wait:

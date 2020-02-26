@@ -3,18 +3,9 @@
 
 
 
-from math import *
-N = int(input())
-A = [[" "] * N for i in range(N)]
-for i in range(N):
- for j in range(N):
-   A[i][j] = abs(i-j)
+n = int(input())
 
+d = [[abs(i - j) for j in range(n)] for i in range(n)]
 
-
-for i in range(N):
- for j in range(N):
-#  print(A[i][j], end = " ")
-  print("{:1d}".format(A[i][j]),end = " ")
- print()
-
+for item in d:
+    print(*item)

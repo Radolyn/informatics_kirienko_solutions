@@ -3,19 +3,9 @@
 
 
 
-from random import *
-N,M = map(int,input().split())
-A = [["."] * M for i in range(N)]
-for i in range(N):
- for j in range(M):
-  if (i + j) % 2 != 0:
-   A[i][j] = "*"
+n, m = map(int, input().split())
 
+d = [['*' if (i + j) % 2 != 0 else '.' for i in range(m)] for j in range(n)]
 
-
-for i in range(N):
- for j in range(M):
-  print(A[i][j], end = " ")
-#  print("{:4d}".format(A[i][j]),end = " ")
- print()
-
+for item in d:
+    print(*item)

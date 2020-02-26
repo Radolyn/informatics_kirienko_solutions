@@ -3,22 +3,9 @@
 
 
 
-from math import *
-N = int(input())
-A = [[" "] * N for i in range(N)]
-for i in range(N):
- for j in range(N):
-   if (i + j) < (N-1):
-    A[i][j] = 0
-   if (i + j) == (N-1):
-    A[i][j] = 1
-   if (i+j) > (N-1):
-    A[i][j] = 2
-   
+n = int(input())
 
-for i in range(N):
- for j in range(N):
-#  print(A[i][j], end = " ")
-  print("{:1d}".format(A[i][j]),end = " ")
- print()
+d = [[0] * (n - i - 1) + [1] + [2] * i for i in range(n)]
 
+for item in d:
+    print(*item)

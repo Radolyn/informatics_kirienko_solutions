@@ -3,17 +3,14 @@
 
 
 
-from random import *
-M = int(input())
-A = [["."] * M for i in range(M)]
-for i in range(M):
-  A[int(M/2)][i] = "*"
-  A[i][int(M/2)] = "*"
-  A[i][i] = "*"
-  A[M - 1 -i][i] = "*"
-for i in range(M):
- for j in range(M):
-  print(A[i][j], end = " ")
-#  print("{:4d}".format(A[i][j]),end = " ")
- print()
+n = int(input())
 
+d = [['.'] * n for i in range(n)]
+
+for i in range(n):
+    for j in range(n):
+        if n // 2 == j or n // 2 == i or n - j - 1 == i or i == j:
+            d[i][j] = "*"
+
+for item in d:
+    print(*item)

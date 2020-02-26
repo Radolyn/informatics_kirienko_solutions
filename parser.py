@@ -11,7 +11,7 @@ try:
     import sys
     import os
     import pickle
-    from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo,  waitS
+    from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo, waitS
 except:
     print('Запустите сначала deps.py - установите зависимости')
     exit(3)
@@ -184,7 +184,8 @@ for problem_id in range(start_id, end_id + 1, 1):
         print(desc)
 
     # Сохраняем описание + исходный код
-    f = open(folder + "\\Задача %s.py" % letter, "w+", encoding='utf-8', newline='\n')
+    f = open(folder + "\\Задача %s.py" %
+             letter, "w+", encoding='utf-8', newline='\n')
 
     # У описания новые строки заменяем на '# ', чтобы было однородней
     # Костыль.нет
@@ -206,7 +207,8 @@ for problem_id in range(start_id, end_id + 1, 1):
     print('Класс работает, ставлю ржомбу. (%s, %i)\n\n' % (letter, problem_id))
 
     passes += 1
-    
+
     waitS()
 
-print('\n\nПриколов скачано: ' + str(passes) + ' из ' + str(abs(start_id - end_id) + 1))
+print('\n\nПриколов скачано: ' + str(passes) +
+      ' из ' + str(abs(start_id - end_id) + 1))
