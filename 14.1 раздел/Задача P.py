@@ -3,4 +3,4 @@
 
 
 
-[[(2 if i > j else 1 if j > i else 0) for j in range(m)] for i in range(n)]
+[[2 if i > j else 1 if j > i else 0 for j in range(m)] for i in range(n)]

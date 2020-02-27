@@ -3,4 +3,4 @@
 
 
 
-[[1 if (j & 2 == 2 and i & 2 == 2) or (j & 2 == 0 and i & 2 == 0) else 0 for j in range(m)] for i in range(n)]
+[[1 if j & 2 == 2 and i & 2 == 2 or j & 2 == 0 and i & 2 == 0 else 0 for j in range(m)] for i in range(n)]
