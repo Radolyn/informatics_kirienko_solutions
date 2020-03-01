@@ -12,6 +12,7 @@ try:
     import os
     import pickle
     import yapf
+    import autopep8
     from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo, \
         rnd_wait, run_python_tool, print_unauthorized
 except:
@@ -140,7 +141,8 @@ for problem_id in range(start_id, end_id + 1, 1):
 
     source = data['data']['source']
     source = source.replace('\r\n', '\n')
-    formatted_source = yapf.yapf_api.FormatCode(source, style_config='google', verify=True)[0]
+    formatted_source = yapf.yapf_api.FormatCode(source, style_config='pep8', verify=True)[0]
+    fixed_source = autopep8.fix_code(formatted_source, options={'aggressive': 2})
 
     if debug:
         print(source)
@@ -207,12 +209,12 @@ for problem_id in range(start_id, end_id + 1, 1):
     desc = desc.replace('# \n', '')
     desc = desc.replace('#\n', '')
     # Бывает в горах Казахстана и такое
-    if desc not in source and desc not in formatted_source:
+    if desc not in source and desc not in formatted_source and desc not in fixed_source:
         f.write(desc)
 
     # Костыль.нет 2
     f.write('\n\n')
-    f.write(formatted_source)
+    f.write(fixed_source)
 
     f.close()
 

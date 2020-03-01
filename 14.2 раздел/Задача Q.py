@@ -3,10 +3,8 @@
 
 n, m = map(int, input().split())
 
-d = [[j + (m * i) + 1
-      for j in range(m)] if i %
-     2 == 0 else list(reversed([j + (m * i) + 1
-                                for j in range(m)]))
+d = [[j + (m * i) + 1 for j in range(m)] if i %
+     2 == 0 else list(reversed([j + (m * i) + 1 for j in range(m)]))
      for i in range(n)]
 
 for item in d:
