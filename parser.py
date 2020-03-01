@@ -85,7 +85,7 @@ for problem_id in range(start_id, end_id + 1, 1):
 
     # Получаем всю информацию по заданию
     url = 'https://informatics.mccme.ru/py/problem/%s/filter-runs?problem_id=%s&from_timestamp=-1&to_timestamp=-1' \
-          '&group_id=0&user_id=%s&lang_id=-1&status_id=-1&statement_id=0&count=10&with_comment=&page=1' % (
+          '&group_id=0&user_id=%s&lang_id=-1&status_id=-1&statement_id=0&count=30&with_comment=&page=1' % (
               problem_id, problem_id, user_id)
 
     response = session.get(url, cookies=cookies_cached)
