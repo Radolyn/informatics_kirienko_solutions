@@ -12,7 +12,7 @@ try:
     import os
     import pickle
     from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, upload, \
-        print_logo, waitS
+        print_logo, rnd_wait, print_unauthorized
 except:
     print('Запустите сначала deps.py - установите зависимости.')
     exit(3)
@@ -50,11 +50,10 @@ print_logo()
 session.cookies = load_cookies()
 
 # Проверка на валидность
-user_data = get_user_details(session)
+user_data = get_user_details()
 
 if user_data is None:
-    print('Токен истёк или невалиден. Получите новый с помощью authorize.py')
-    exit(4)
+    print_unauthorized()
 
 print('Доброго времени суток, ' + user_data['name'])
 print('Произошла авторизация, идём к списыванию.\n\n')
@@ -79,7 +78,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     print('Задача списана успешно. (%s, %i)\n\n' % (letter, problem_id))
     passes += 1
 
-    waitS()
+    rnd_wait()
 
 print('\n\nПриколов отправлено: ' + str(passes) +
       ' из ' + str(abs(start_id - end_id) + 1))

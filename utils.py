@@ -4,11 +4,12 @@ import os
 import pickle
 import sys
 import time
+from requests import Session
 from random import uniform
 
 import requests
-
 # Выводит всю отладочную информацию
+
 debug = False
 
 # Включает рандомную паузу между запросами
@@ -142,10 +143,16 @@ def usage():
     sys.exit(2)
 
 
-def get_user_details(session):
+def get_user_details():
+    session = Session()
     response = session.get(
         'https://informatics.mccme.ru/py/rating/get', cookies=load_cookies())
     return json.loads(response.text)['current_user_data']
+
+
+def print_unauthorized():
+    print('Токен истёк или невалиден. Получите новый с помощью authorize.py')
+    exit(4)
 
 
 def save_cookies(cookies):
@@ -176,10 +183,24 @@ def upload(problem_id, file):
         return True
 
 
-def waitS():
+def rnd_wait():
     if not random_wait:
         return
     sleep_time = uniform(0, 1)
     time.sleep(sleep_time)
     if debug:
         print('Произошла пауза в ' + str(sleep_time) + ' sec')
+
+
+def is_authorized():
+    user = get_user_details()
+    if user is None:
+        return False
+    return True
+
+
+def run_python_tool(command):
+    if debug:
+        print('cd \"' + os.path.dirname(sys.executable) + '\" && ' + os.path.basename(sys.executable) + ' -m ' + command)
+    os.system('cd \"' + os.path.dirname(sys.executable) + '\" && ' + os.path.basename(sys.executable) + ' -m ' + command)
+

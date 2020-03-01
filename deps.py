@@ -1,7 +1,7 @@
-import os
+from utils import run_python_tool
 
-os.system('python -m pip install --upgrade pip --verbose')
+run_python_tool('pip install --upgrade pip')
 
-os.system('python -m pip install requests BeautifulSoup4 lxml --verbose')
+run_python_tool('pip install requests BeautifulSoup4 lxml autopep8 --user')
 
 print('Done. Happy hacking :)')

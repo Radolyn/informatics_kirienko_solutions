@@ -1,6 +1,5 @@
-# В условиях предыдущей задачи определите и выведите средние баллы участников олимпиады в 9 классе, в 10 классе, в 11 классе.
-
-
+# В условиях предыдущей задачи определите и выведите средние баллы
+# участников олимпиады в 9 классе, в 10 классе, в 11 классе.
 
 
 array_of_points = [0, 0, 0]
@@ -22,7 +21,7 @@ for i in range(len(temp_array)):
         array_of_members[2] += 1
 for i in range(3):
     try:
-        blank_string += str(array_of_points[i]/array_of_members[i]) + ' '
-    except:
+        blank_string += str(array_of_points[i] / array_of_members[i]) + ' '
+    except BaseException:
         pass
 print(blank_string)

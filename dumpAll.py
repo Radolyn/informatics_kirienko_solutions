@@ -1,6 +1,9 @@
 import os
 
-from utils import debug, ranges
+from utils import debug, ranges, is_authorized, print_unauthorized
+
+if not is_authorized():
+    print_unauthorized()
 
 for item in ranges:
     for r in item:

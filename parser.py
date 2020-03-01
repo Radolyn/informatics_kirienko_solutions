@@ -11,7 +11,8 @@ try:
     import sys
     import os
     import pickle
-    from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo, waitS
+    from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo, \
+        rnd_wait, run_python_tool, print_unauthorized
 except:
     print('Запустите сначала deps.py - установите зависимости')
     exit(3)
@@ -58,7 +59,7 @@ cookies_cached = load_cookies()
 session.cookies = cookies_cached
 
 # Проверка на валидность
-user_data = get_user_details(session)
+user_data = get_user_details()
 
 if parsed['letter'] not in letters_list:
     print('Хайповая буква, но максимум AZ')
@@ -67,8 +68,7 @@ if parsed['letter'] not in letters_list:
 letter_offset = letters_list.index(parsed['letter'])
 
 if user_data is None:
-    print('Токен истёк или невалиден. Получите новый с помощью authorize.py')
-    exit(4)
+    print_unauthorized()
 
 print('Доброго времени суток, ' + user_data['name'])
 print('Произошла авторизация, идём к выкачке.\n\n')
@@ -138,6 +138,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     print('Ставлю лайк')
 
     source = data['data']['source']
+    source = source.replace('\r\n', '\n')
 
     if debug:
         print(source)
@@ -148,8 +149,8 @@ for problem_id in range(start_id, end_id + 1, 1):
     page = session.get(desc_url)
 
     soup = BeautifulSoup(page.text, 'lxml')
-    if debug:
-        print(soup)
+    # if debug:
+    #     print(soup)
 
     # Описание может быть просто в div'е legend, а может быть обёрнуто в параграф
     desc = soup.find('div', {'class': 'legend'})
@@ -161,8 +162,8 @@ for problem_id in range(start_id, end_id + 1, 1):
         page = session.get(desc_url)
 
         soup = BeautifulSoup(page.content, 'lxml')
-        if debug:
-            print(soup)
+        # if debug:
+        #     print(soup)
         desc = soup.find('div', {'class': 'legend'}).find('p')
 
         if desc is None:
@@ -184,8 +185,12 @@ for problem_id in range(start_id, end_id + 1, 1):
         print(desc)
 
     # Сохраняем описание + исходный код
-    f = open(folder + "\\Задача %s.py" %
-             letter, "w+", encoding='utf-8', newline='\n')
+    path = folder + "\\Задача %s.py" % letter
+
+    f = open(path, "w+", encoding='utf-8', newline='\n')
+
+    if debug:
+        print(path)
 
     # У описания новые строки заменяем на '# ', чтобы было однородней
     # Костыль.нет
@@ -197,18 +202,26 @@ for problem_id in range(start_id, end_id + 1, 1):
     desc = desc.replace('	', '')
     desc = desc.replace('# \n', '')
     desc = desc.replace('#  \n', '')
-    f.write(desc)
+    desc = desc.replace('# \n', '')
+    desc = desc.replace('#\n', '')
+    # Бывает в горах Казахстана и такое
+    if desc not in source:
+        f.write(desc)
     # Костыль.нет 2
-    f.write('\n\n\n\n')
-    f.write(source.replace('\r\n', '\n'))
+    f.write('\n\n')
+    f.write(source)
 
     f.close()
+
+    print('Файл сохранили, теперь форматируем жёсткий диск...')
+
+    run_python_tool('autopep8 --in-place -a -a \"' + os.path.abspath(path) + '\"')
 
     print('Класс работает, ставлю ржомбу. (%s, %i)\n\n' % (letter, problem_id))
 
     passes += 1
 
-    waitS()
+    rnd_wait()
 
 print('\n\nПриколов скачано: ' + str(passes) +
       ' из ' + str(abs(start_id - end_id) + 1))

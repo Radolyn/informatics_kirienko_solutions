@@ -1,17 +1,20 @@
 import os
 import sys
 
-from utils import debug, ranges
+from utils import debug, ranges, is_authorized, print_unauthorized
 
 try:
-    rng = ranges[int(sys.argv[1]) - 1]
+    problems = ranges[int(sys.argv[1]) - 1]
 except:
     print('Неверный параметр.')
     exit(68)
 
-for r in rng:
+if not is_authorized():
+    print_unauthorized()
+
+for problem in problems:
     cmd = 'python parser.py --folder "%s" --range %s --letter %s' % (
-        r['folder'], r['range'], r['letter'])
+        problem['folder'], problem['range'], problem['letter'])
     if debug:
         print(cmd)
 
