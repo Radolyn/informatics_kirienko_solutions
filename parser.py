@@ -141,8 +141,12 @@ for problem_id in range(start_id, end_id + 1, 1):
 
     source = data['data']['source']
     source = source.replace('\r\n', '\n')
-    formatted_source = yapf.yapf_api.FormatCode(source, style_config='pep8', verify=True)[0]
-    fixed_source = autopep8.fix_code(formatted_source, options={'aggressive': 2})
+    try:
+        formatted_source = yapf.yapf_api.FormatCode(source, style_config='pep8', verify=True)[0]
+        fixed_source = autopep8.fix_code(formatted_source, options={'aggressive': 2})
+    except:
+        print('Форматирование змеи прошло неправильно, идём дальше.\n')
+        continue
 
     if debug:
         print(source)

@@ -1,6 +1,5 @@
 # Дан список чисел. Выведите все элементы списка, которые больше предыдущего элемента.
 
-
 inputList = list(map(int, input().split(" ")))
 
 for i in range(len(inputList) - 1):

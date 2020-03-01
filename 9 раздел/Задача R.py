@@ -3,7 +3,6 @@
 # равный C, сдвинув все элементы имевшие индекс не менее k вправо.
 # 
 
-
 l = list(map(int, input().split()))
 nums = list(map(int, input().split()))
 

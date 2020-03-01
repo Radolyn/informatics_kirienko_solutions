@@ -1,6 +1,5 @@
-# 		Определите $N=100000$ и создайте массив [True] * ($N + 1$).Заполните его значениями так, чтобы IsPrime[$i$] == True, если $i$ —простое число и IsPrime[$i$] == False, если $i$ — составное.
+# Определите $N=100000$ и создайте массив [True] * ($N + 1$).Заполните его значениями так, чтобы IsPrime[$i$] == True, если $i$ —простое число и IsPrime[$i$] == False, если $i$ — составное.
 #  
-
 
 class informatics:
     @staticmethod
@@ -42,7 +41,7 @@ class informatics:
     def Resheto():
         N = 100000
         s = set(range(1, N, 2))
-        for i in range(2, int(N ** .5)):
+        for i in range(2, int(N**.5)):
             if i in s:
                 s -= set(range(i * i, N, i))
         return s

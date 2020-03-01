@@ -7,9 +7,8 @@
 # одинаково (т.е. нельзя одну коробку расположить “стоя”, а другую —“лежа”)
 # 
 
-
-a, b, c, d, e, f = int(input()), int(input()), int(
-    input()), int(input()), int(input()), int(input())
+a, b, c, d, e, f = int(input()), int(input()), int(input()), int(input()), int(
+    input()), int(input())
 
 # резултат (логычна)
 result = 0
