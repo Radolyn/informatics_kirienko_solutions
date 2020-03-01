@@ -11,6 +11,7 @@ try:
     import sys
     import os
     import pickle
+    import yapf
     from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo, \
         rnd_wait, run_python_tool, print_unauthorized
 except:
@@ -139,6 +140,7 @@ for problem_id in range(start_id, end_id + 1, 1):
 
     source = data['data']['source']
     source = source.replace('\r\n', '\n')
+    formatted_source = yapf.yapf_api.FormatCode(source, style_config='google', verify=True)[0]
 
     if debug:
         print(source)
@@ -205,17 +207,14 @@ for problem_id in range(start_id, end_id + 1, 1):
     desc = desc.replace('# \n', '')
     desc = desc.replace('#\n', '')
     # Бывает в горах Казахстана и такое
-    if desc not in source:
+    if desc not in source and desc not in formatted_source:
         f.write(desc)
+
     # Костыль.нет 2
     f.write('\n\n')
-    f.write(source)
+    f.write(formatted_source)
 
     f.close()
-
-    print('Файл сохранили, теперь форматируем жёсткий диск...')
-
-    run_python_tool('autopep8 --in-place -a -a \"' + os.path.abspath(path) + '\"')
 
     print('Класс работает, ставлю ржомбу. (%s, %i)\n\n' % (letter, problem_id))
 

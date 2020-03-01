@@ -17,7 +17,7 @@ def GetCount(n):
 n = int(input())
 
 c = GetCount(n)
-c2 = n ** 2 - n
+c2 = n**2 - n
 
 if c == c2:
     print("YES")
