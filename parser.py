@@ -16,8 +16,9 @@ try:
     from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo, \
         rnd_wait, run_python_tool, print_unauthorized
 except:
-    print('Запустите сначала deps.py - установите зависимости')
-    exit(3)
+    from utils import deps_message
+
+    deps_message()
 
 # Этот скрипт парсит последний удачный run по problem_id, извлекает из него сурсы и создаёт файл с решением.
 # API у них не задокументировано *(я нашёл роуты, но не более:
@@ -101,7 +102,7 @@ for problem_id in range(start_id, end_id + 1, 1):
 
     print('Получаем удачные run\'ы...')
 
-    success_runs = list()
+    success_runs = []
 
     # За выполненное задание дают 100 баллов
     for item in data['data']:
@@ -141,6 +142,7 @@ for problem_id in range(start_id, end_id + 1, 1):
 
     source = data['data']['source']
     source = source.replace('\r\n', '\n')
+
     try:
         formatted_source = yapf.yapf_api.FormatCode(source, style_config='pep8', verify=True)[0]
         fixed_source = autopep8.fix_code(formatted_source, options={'aggressive': 2})
@@ -157,31 +159,13 @@ for problem_id in range(start_id, end_id + 1, 1):
     page = session.get(desc_url)
 
     soup = BeautifulSoup(page.text, 'lxml')
-    # if debug:
-    #     print(soup)
 
     # Описание может быть просто в div'е legend, а может быть обёрнуто в параграф
     desc = soup.find('div', {'class': 'legend'})
 
     if desc is None:
-        print('Ржомба не сработала, продолжаем флексить')
-        desc_url = 'https://informatics.mccme.ru/mod/statements/view3.php?id=%s' % problem_id
-
-        page = session.get(desc_url)
-
-        soup = BeautifulSoup(page.content, 'lxml')
-        # if debug:
-        #     print(soup)
-        desc = soup.find('div', {'class': 'legend'}).find('p')
-
-        if desc is None:
-            print('Ржомба не сработала, включаем flex air')
-            desc = soup.find('div', {'class': 'legend'}).text
-            if desc is None:
-                print('Ржомба не сработала, вырубаем ютуб\n\n')
-                continue
-        else:
-            desc = desc.text
+        print('Ржомба не сработала, идём дальше.')
+        continue
     else:
         desc = soup.find('div', {'class': 'legend'}).find('p')
         if desc is None:
@@ -212,6 +196,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     desc = desc.replace('#  \n', '')
     desc = desc.replace('# \n', '')
     desc = desc.replace('#\n', '')
+
     # Бывает в горах Казахстана и такое
     if desc not in source and desc not in formatted_source and desc not in fixed_source:
         f.write(desc)
@@ -228,5 +213,4 @@ for problem_id in range(start_id, end_id + 1, 1):
 
     rnd_wait()
 
-print('\n\nПриколов скачано: ' + str(passes) +
-      ' из ' + str(abs(start_id - end_id) + 1))
+print('\n\nПриколов скачано: %i из %i' % (passes, abs(start_id - end_id) + 1))

@@ -4,8 +4,9 @@ try:
     import pickle
     from utils import save_cookies, debug, headers
 except:
-    print('Запустите сначала deps.py - установите зависимости.')
-    exit(3)
+    from utils import deps_message
+
+    deps_message()
 
 if len(sys.argv) != 3:
     print(

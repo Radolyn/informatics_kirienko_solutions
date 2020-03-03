@@ -4,15 +4,15 @@ import os
 import pickle
 import sys
 import time
-from requests import Session
 from random import uniform
 
 import requests
-# Выводит всю отладочную информацию
+from requests import Session
 
+# Выводит всю отладочную информацию
 debug = False
 
-# Включает рандомную паузу между запросами
+# Включает рандомную паузу между запросами (загрузка\отправка)
 random_wait = True
 
 # Заголовки
@@ -32,6 +32,7 @@ letters_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM',
                 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ']
 
+# Копия таблицы с GitHub'a
 ranges = [
     [
         {'letter': 'A', 'range': '3443-3450', 'folder': '1 раздел'}
@@ -201,6 +202,12 @@ def is_authorized():
 
 def run_python_tool(command):
     if debug:
-        print('cd \"' + os.path.dirname(sys.executable) + '\" && ' + os.path.basename(sys.executable) + ' -m ' + command)
-    os.system('cd \"' + os.path.dirname(sys.executable) + '\" && ' + os.path.basename(sys.executable) + ' -m ' + command)
+        print(
+            'cd \"' + os.path.dirname(sys.executable) + '\" && ' + os.path.basename(sys.executable) + ' -m ' + command)
+    os.system(
+        'cd \"' + os.path.dirname(sys.executable) + '\" && ' + os.path.basename(sys.executable) + ' -m ' + command)
 
+
+def deps_message():
+    print('Запустите сначала deps.py - установите зависимости')
+    exit(3)

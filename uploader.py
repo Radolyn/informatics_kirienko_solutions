@@ -14,8 +14,9 @@ try:
     from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, upload, \
         print_logo, rnd_wait, print_unauthorized
 except:
-    print('Запустите сначала deps.py - установите зависимости.')
-    exit(3)
+    from utils import deps_message
+
+    deps_message()
 
 # Парсим аргументы из ком. строки
 parsed = parse_argv(sys.argv[1:])
