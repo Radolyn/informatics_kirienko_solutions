@@ -198,7 +198,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     desc = desc.replace('#\n', '')
 
     # Бывает в горах Казахстана и такое
-    if desc not in source and desc not in formatted_source and desc not in fixed_source:
+    if '# ' + desc[2] not in fixed_source:
         f.write(desc)
 
     # Костыль.нет 2

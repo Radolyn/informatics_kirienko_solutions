@@ -7,7 +7,6 @@ import time
 from random import uniform
 
 import requests
-from requests import Session
 
 # Выводит всю отладочную информацию
 debug = False
@@ -145,7 +144,7 @@ def usage():
 
 
 def get_user_details():
-    session = Session()
+    session = requests.Session()
     response = session.get(
         'https://informatics.mccme.ru/py/rating/get', cookies=load_cookies())
     return json.loads(response.text)['current_user_data']
