@@ -2,6 +2,10 @@
 
 Решения задач авторского курса Д. П. Кириенко с informatics.mccme.ru (informatics.msk.ru)
 
+## Новый парсер
+
+https://github.com/AlexeyZavar/informatics_new
+
 ## Парсер для маленьких
 
 Чтобы не копировать код и описание с сайта, был сделан парсер.
