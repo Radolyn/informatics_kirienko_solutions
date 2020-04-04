@@ -2,7 +2,7 @@ try:
     import requests
     import sys
     import pickle
-    from utils import save_cookies, debug, headers
+    from utils import save_cookies, debug, headers, base_url
 except:
     from utils import deps_message
 
@@ -11,14 +11,19 @@ except:
 if len(sys.argv) != 3:
     print(
         'Использование: authorize.py login password.\n'
-        'Ваши данные никуда не отправляются, кроме костыльного сервера informatics.')
+        'Ваши данные никуда не отправляются, кроме костыльного сервера informatics.'
+    )
     exit(2)
 
 with requests.Session() as session:
-    session.post('https://informatics.mccme.ru/login/index.php',
-                 data={'username': sys.argv[1].lower(), 'password': sys.argv[2]}, headers=headers)
+    session.post(base_url + 'login/index.php',
+                 data={
+                     'username': sys.argv[1].lower(),
+                     'password': sys.argv[2]
+                 },
+                 headers=headers)
 
-    response = session.get('https://informatics.mccme.ru/login/index.php')
+    response = session.get(base_url + 'login/index.php')
 
     if 'Вы зашли под именем' in response.text:
         print('Авторизация сохранена. Теперь можно пользоваться парсером!')

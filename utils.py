@@ -14,78 +14,120 @@ debug = False
 # Включает рандомную паузу между запросами (загрузка\отправка)
 random_wait = True
 
+# Ссылка на информатикс
+base_url = 'https://informatics.msk.ru/'
+
 # Заголовки
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/70.0.3538.77 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,'
-              'application/signed-exchange;v=b3',
+    'User-Agent':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+    'Chrome/70.0.3538.77 Safari/537.36',
+    'Accept':
+    'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,'
+    'application/signed-exchange;v=b3',
     # 'Content-Type': 'application/x-www-form-urlencoded',
-    'DNT': '1',
-    'Upgrade-Insecure-Requests': '1',
-    'Origin': 'https://informatics.mccme.ru'
+    'DNT':
+    '1',
+    'Upgrade-Insecure-Requests':
+    '1',
+    'Origin':
+    base_url
 }
 
 # Все букОвки от A до AZ (не бойтесь, я их сгенерировал за 3 строчки :D)
-letters_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-                'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM',
-                'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ']
+letters_list = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+    'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC',
+    'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO',
+    'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ'
+]
 
 # Копия таблицы с GitHub'a
-ranges = [
-    [
-        {'letter': 'A', 'range': '3443-3450', 'folder': '1 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3455-3483', 'folder': '2 раздел'},
-        {'letter': 'AD', 'range': '3535-3535', 'folder': '2 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3501-3527', 'folder': '3 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3528-3553', 'folder': '4 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3608-3629', 'folder': '5 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3735-3748', 'folder': '6 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3642-3667', 'folder': '7 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3791-3815', 'folder': '8 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3828-3853', 'folder': '9 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3828-3853', 'folder': '10 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '4179-4197', 'folder': '11 раздел'},
-        {'letter': 'T', 'range': '112666-112672', 'folder': '11 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '111152-111177', 'folder': '12 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '111300-111325', 'folder': '13 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '111194-111220', 'folder': '14.1 раздел'},
-        {'letter': 'A', 'range': '111362-111387', 'folder': '14.2 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '111326-111361', 'folder': '15 раздел'}
-    ],
-    [
-        {'letter': 'A', 'range': '3749-3774', 'folder': '16 раздел'},
-        {'letter': 'AA', 'range': '113078-113078', 'folder': '16 раздел'}
-    ]
-]
+ranges = [[{
+    'letter': 'A',
+    'range': '3443-3450',
+    'folder': '1 раздел'
+}],
+          [{
+              'letter': 'A',
+              'range': '3455-3483',
+              'folder': '2 раздел'
+          }, {
+              'letter': 'AD',
+              'range': '3535-3535',
+              'folder': '2 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '3501-3527',
+              'folder': '3 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '3528-3553',
+              'folder': '4 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '3608-3629',
+              'folder': '5 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '3735-3748',
+              'folder': '6 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '3642-3667',
+              'folder': '7 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '3791-3815',
+              'folder': '8 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '3828-3853',
+              'folder': '9 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '3828-3853',
+              'folder': '10 раздел'
+          }],
+          [{
+              'letter': 'A',
+              'range': '4179-4197',
+              'folder': '11 раздел'
+          }, {
+              'letter': 'T',
+              'range': '112666-112672',
+              'folder': '11 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '111152-111177',
+              'folder': '12 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '111300-111325',
+              'folder': '13 раздел'
+          }],
+          [{
+              'letter': 'A',
+              'range': '111194-111220',
+              'folder': '14.1 раздел'
+          }, {
+              'letter': 'A',
+              'range': '111362-111387',
+              'folder': '14.2 раздел'
+          }], [{
+              'letter': 'A',
+              'range': '111326-111361',
+              'folder': '15 раздел'
+          }],
+          [{
+              'letter': 'A',
+              'range': '3749-3774',
+              'folder': '16 раздел'
+          }, {
+              'letter': 'AA',
+              'range': '113078-113078',
+              'folder': '16 раздел'
+          }]]
 
 
 def print_logo():
@@ -103,9 +145,8 @@ def print_logo():
 
 def parse_argv(argv):
     try:
-        opts, args = getopt.getopt(
-            argv, "h",
-            ["one=", "letter=", "range=", "folder="])
+        opts, args = getopt.getopt(argv, "h",
+                                   ["one=", "letter=", "range=", "folder="])
     except getopt.GetoptError:
         usage()
     params = {'folder': '', 'range': [], 'letter': 'A'}
@@ -130,14 +171,12 @@ def parse_argv(argv):
 
 
 def usage():
-    print(
-        '''
+    print('''
         Использование: parser.py --folder папка_для_сохранения параметры
         Для получения исх. кода на 1 задание следует указать: --one номер_задания --letter буква
         Для получения исх. кодов на несколько заданий следует указать: --range нач_номер-кон_номер --letter нач_буква
         Если --letter не указано, по умолчанию используется A
-        '''
-    )
+        ''')
     if debug:
         print(sys.argv)
     sys.exit(2)
@@ -145,8 +184,7 @@ def usage():
 
 def get_user_details():
     session = requests.Session()
-    response = session.get(
-        'https://informatics.mccme.ru/py/rating/get', cookies=load_cookies())
+    response = session.get(base_url + 'py/rating/get', cookies=load_cookies())
     return json.loads(response.text)['current_user_data']
 
 
@@ -169,10 +207,14 @@ def upload(problem_id, file):
     if not os.path.exists(file):
         return False
     with open(file, 'rb') as f:
-        headers['Referer'] = 'https://informatics.mccme.ru/mod/statements/view.php?id=' + \
+        headers['Referer'] = base_url + 'mod/statements/view.php?id=' + \
                              str(problem_id)
-        response = requests.post('https://informatics.mccme.ru/py/problem/' + str(problem_id) + '/submit',
-                                 files=dict(file=f), cookies=load_cookies(), headers=headers, data=dict(lang_id=27))
+        response = requests.post(base_url + 'py/problem/' + str(problem_id) +
+                                 '/submit',
+                                 files=dict(file=f),
+                                 cookies=load_cookies(),
+                                 headers=headers,
+                                 data=dict(lang_id=27))
         if debug:
             print(response.text)
         j = json.loads(response.text)
@@ -201,10 +243,10 @@ def is_authorized():
 
 def run_python_tool(command):
     if debug:
-        print(
-            'cd \"' + os.path.dirname(sys.executable) + '\" && ' + os.path.basename(sys.executable) + ' -m ' + command)
-    os.system(
-        'cd \"' + os.path.dirname(sys.executable) + '\" && ' + os.path.basename(sys.executable) + ' -m ' + command)
+        print('cd \"' + os.path.dirname(sys.executable) + '\" && ' +
+              os.path.basename(sys.executable) + ' -m ' + command)
+    os.system('cd \"' + os.path.dirname(sys.executable) + '\" && ' +
+              os.path.basename(sys.executable) + ' -m ' + command)
 
 
 def deps_message():

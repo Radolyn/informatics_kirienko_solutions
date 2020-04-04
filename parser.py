@@ -14,7 +14,7 @@ try:
     import yapf
     import autopep8
     from utils import parse_argv, usage, get_user_details, load_cookies, debug, headers, letters_list, print_logo, \
-        rnd_wait, run_python_tool, print_unauthorized
+        rnd_wait, run_python_tool, print_unauthorized, base_url
 except:
     from utils import deps_message
 
@@ -85,7 +85,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     letter = letters_list[problem_id - start_id + letter_offset]
 
     # Получаем всю информацию по заданию
-    url = 'https://informatics.mccme.ru/py/problem/%s/filter-runs?problem_id=%s&from_timestamp=-1&to_timestamp=-1' \
+    url = base_url + 'py/problem/%s/filter-runs?problem_id=%s&from_timestamp=-1&to_timestamp=-1' \
           '&group_id=0&user_id=%s&lang_id=-1&status_id=-1&statement_id=0&count=30&with_comment=&page=1' % (
               problem_id, problem_id, user_id)
 
@@ -125,7 +125,7 @@ for problem_id in range(start_id, end_id + 1, 1):
     print('Получаем source код...')
 
     # Парсим исходный код
-    source_url = 'https://informatics.mccme.ru/py/problem/run/%i/source' % run['id']
+    source_url = base_url + 'py/problem/run/%i/source' % run['id']
 
     response = session.get(source_url, cookies=cookies_cached)
     data = json.loads(response.text)
@@ -144,8 +144,11 @@ for problem_id in range(start_id, end_id + 1, 1):
     source = source.replace('\r\n', '\n')
 
     try:
-        formatted_source = yapf.yapf_api.FormatCode(source, style_config='pep8', verify=True)[0]
-        fixed_source = autopep8.fix_code(formatted_source, options={'aggressive': 2})
+        formatted_source = yapf.yapf_api.FormatCode(source,
+                                                    style_config='pep8',
+                                                    verify=True)[0]
+        fixed_source = autopep8.fix_code(formatted_source,
+                                         options={'aggressive': 2})
     except:
         print('Форматирование змеи прошло неправильно, идём дальше.\n')
         continue
@@ -154,7 +157,7 @@ for problem_id in range(start_id, end_id + 1, 1):
         print(source)
 
     # Парсим описание. На самом деле, это для поисковиков, чтобы лучше индексировали :)
-    desc_url = 'https://informatics.mccme.ru/mod/statements/view3.php?chapterid=%s' % problem_id
+    desc_url = base_url + 'mod/statements/view3.php?chapterid=%s' % problem_id
 
     page = session.get(desc_url)
 
